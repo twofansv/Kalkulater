@@ -1,3 +1,27 @@
-.all-seeing.contatiner {
+.all-seeing-container{
     display: flex;
+    flex-direction: column;
+    border: 10px solid red;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
+
+.kalkulater-container {
+    display: flex;
+    flex-direction: column;
+    border: 10px solid rgb(0, 47, 255);
+    background-color: rgb(129, 36, 36);
+    align-items: center;
+    width: 300px;
+    
+}
+
+.kalkulater-container div{
+    flex: 1;
+    border: 10px solid rgb(0, 47, 255);
+    padding: 100px;
+    width: 100px;
+}
+
+
