@@ -3,7 +3,7 @@
     flex-direction: column;
     border: 10px solid red;
     height: 100vh;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
 }
 
@@ -18,10 +18,37 @@
 }
 
 .kalkulater-container div{
-    flex: 1;
+    display: flex;
+    flex: 0;
     border: 10px solid rgb(0, 47, 255);
-    padding: 100px;
+    padding: 100px; 
     width: 100px;
 }
 
+#display-output {
+    padding-top: 10px;
+}
 
+#buttons-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    padding: 0px;
+    border: 0px;
+  
+}
+
+#button-nums, #button-operators {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 200px;
+    padding: 50px;
+}
+
+button {
+    padding:7px;
+    height: 1px;
+
+}
