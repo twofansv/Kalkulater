@@ -1,6 +1,7 @@
-.all-seeing-container{
+body {
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-direction: column;
     border: 10px solid red;
     height: 100vh;
     justify-content: center; 
@@ -19,13 +20,14 @@
 
 .kalkulater-container div{
     display: flex;
-    flex: 0;
+  /* flex: 1;  */
     border: 10px solid rgb(0, 47, 255);
     padding: 100px; 
-    width: 100px;
+    width: 300px;
 }
 
 #display-output {
+    width: 100px;
     padding-top: 10px;
 }
 
@@ -41,14 +43,28 @@
 
 #button-nums, #button-operators {
     display: flex;
-    flex-direction: row;
+    padding: 0px;;
     flex-wrap: wrap;
-    height: 200px;
-    padding: 50px;
-}
+    /* justify-content: center;  */
+} 
 
 button {
-    padding:7px;
-    height: 1px;
+    flex: 1;
+    width: 50px;
+    height: 50px;
+    padding: 1.2em;
+    text-align: center;
 
+}
+
+#button-nums {
+    width: 350px;
+}
+
+#zero-button {
+    flex-grow: 2;
+}
+
+#equals-button {
+    flex-grow: 5;
 }
