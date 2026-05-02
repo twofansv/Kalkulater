@@ -2,66 +2,100 @@ let numberButtons = document.querySelectorAll('.number');
 let operatorButtons = document.querySelectorAll('#button-operators')
 
 let displayOutput = document.querySelector('#output');
-const clear = document.querySelector('#clear');
-let firstNum = 0;
-let secondNum = 0;
 
+const clear = document.querySelector('#clear');
 const add = document.querySelector('#add');
+const subtract = document.querySelector('#subtract');
+const multiply = document.querySelector('#multiply');
+const divide = document.querySelector('#divide');
 const equals = document.querySelector('#equals-button');
 
 
 
 clear.addEventListener('click', () => {
-    output.textContent = 0;
-    firstNum = 0;
-    secondNum = 0;
+    displayOutput.textContent = 0;
 });
 
 
 //epiphany: if may na click na ANY operator, bali yung magiging container ng 
 //second number is yung secondNum na.
 
-//GET firstNum:
+//GET first number:
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        if (output.textContent === '0') {
+        if (displayOutput.textContent === '0') {
             displayOutput.textContent = '';
         }
             displayOutput.textContent += button.textContent;
-            firstNum = displayOutput.textContent;
     });
 });
 
-//GET operator:
+//Calculate after pressing equals:
 
 add.addEventListener('click', () => {
     displayOutput.textContent += '+';
 
-    equals.addEventListener('click', () => {
+});
+
+subtract.addEventListener('click', () => {
+    displayOutput.textContent += '-';
+
+});
+
+multiply.addEventListener('click', () => {
+    displayOutput.textContent += '*';
+
+});
+
+divide.addEventListener('click', () => {
+    displayOutput.textContent += '/';
+
+});
+
+equals.addEventListener('click', () => {
+
         let expression = displayOutput.textContent;
+        const identifier = Array.from(expression);
 
-        const splitted = expression.split('+');
 
-        const result = splitted.reduce((previous, curr) => {
-            // kaya may + yung previous at curr is to convert it to number. 
+        if (identifier.includes('+')){
+            const splitted = expression.split('+');
+            const result = splitted.reduce((previous, curr) => {
+            // kaya may + yung previous at curr is to convert it to number. SEE unary operator
             return +previous + +curr;
         });
         displayOutput.textContent = '';
         displayOutput.textContent += result;
-    });
-    
+
+        }else if (identifier.includes('-')){
+            const splitted = expression.split('-');
+            const result = splitted.reduce((previous, curr) => {
+            return +previous - +curr;
+        });
+        displayOutput.textContent = '';
+        displayOutput.textContent += result;
+
+        }else if (identifier.includes('*')){
+            const splitted = expression.split('*');
+            const result = splitted.reduce((previous, curr) => {
+            return +previous * +curr;
+        });
+        displayOutput.textContent = '';
+        displayOutput.textContent += result;
+
+        }else if (identifier.includes('/')){
+            const splitted = expression.split('/');
+            const result = splitted.reduce((previous, curr) => {
+            return +previous / +curr;
+        });
+        displayOutput.textContent = '';
+        displayOutput.textContent += result;
+        };
+
+
+
 });
 
 
 
 
-
-
-
-function addition(firstNum, secondNum) {
-    return firstNum + secondNum;
-};
-
-function subtraction(firstNum, secondNum) {
-    return firstNum - secondNum;
-}
