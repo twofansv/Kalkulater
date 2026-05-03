@@ -1,6 +1,4 @@
 let numberButtons = document.querySelectorAll('.number');
-let operatorButtons = document.querySelectorAll('#button-operators')
-
 let displayOutput = document.querySelector('#output');
 
 const clear = document.querySelector('#clear');
@@ -52,6 +50,7 @@ divide.addEventListener('click', () => {
 
 });
 
+
 equals.addEventListener('click', () => {
 
         let expression = displayOutput.textContent;
@@ -66,34 +65,29 @@ equals.addEventListener('click', () => {
         });
         displayOutput.textContent = '';
         displayOutput.textContent += result;
-
-        }else if (identifier.includes('-')){
-            const splitted = expression.split('-');
-            const result = splitted.reduce((previous, curr) => {
+    } else if (identifier.includes('-')){
+        const splitted = expression.split('-');
+        const result = splitted.reduce((previous, curr) => {
             return +previous - +curr;
         });
         displayOutput.textContent = '';
         displayOutput.textContent += result;
-
-        }else if (identifier.includes('*')){
-            const splitted = expression.split('*');
-            const result = splitted.reduce((previous, curr) => {
+    } else if (identifier.includes('*')){
+        const splitted = expression.split('*');
+        const result = splitted.reduce((previous, curr) => {
             return +previous * +curr;
         });
         displayOutput.textContent = '';
         displayOutput.textContent += result;
-
-        }else if (identifier.includes('/')){
-            const splitted = expression.split('/');
-            const result = splitted.reduce((previous, curr) => {
+    } else if (identifier.includes('/')){
+        const splitted = expression.split('/');
+        const result = splitted.reduce((previous, curr) => {
             return +previous / +curr;
         });
         displayOutput.textContent = '';
-        displayOutput.textContent += result;
-        };
+        displayOutput.textContent += result.toFixed(3);
 
-
-
+    }  
 });
 
 
