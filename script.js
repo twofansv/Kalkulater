@@ -1,5 +1,6 @@
 let numberButtons = document.querySelectorAll('.number');
 let displayOutput = document.querySelector('#output');
+let operatorButtons = document.querySelectorAll('.number');
 
 const clear = document.querySelector('#clear');
 const add = document.querySelector('#add');
@@ -51,20 +52,39 @@ divide.addEventListener('click', () => {
 });
 
 
+operatorButtons.forEach((button) => {
+    let expression = displayOutput.textContent;
+    const identifier = Array.from(expression);
+
+    button.addEventListener('click', () => {
+        if (identifier.includes('*') || 
+        identifier.includes('+') ||
+        identifier.includes('-') ||
+        identifier.includes('/')) {
+
+            
+        }
+
+    });
+});
+
+
+
+
 equals.addEventListener('click', () => {
 
         let expression = displayOutput.textContent;
         const identifier = Array.from(expression);
 
 
-        if (identifier.includes('+')){
-            const splitted = expression.split('+');
-            const result = splitted.reduce((previous, curr) => {
-            // kaya may + yung previous at curr is to convert it to number. SEE unary operator
-            return +previous + +curr;
-        });
-        displayOutput.textContent = '';
-        displayOutput.textContent += result;
+    if (identifier.includes('+')){
+        const splitted = expression.split('+');
+        const result = splitted.reduce((previous, curr) => {
+        // kaya may + yung previous at curr is to convert it to number. SEE unary operator
+        return +previous + +curr;
+    });
+    displayOutput.textContent = '';
+    displayOutput.textContent += result;
     } else if (identifier.includes('-')){
         const splitted = expression.split('-');
         const result = splitted.reduce((previous, curr) => {
