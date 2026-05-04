@@ -1,6 +1,6 @@
 let numberButtons = document.querySelectorAll('.number');
 let displayOutput = document.querySelector('#output');
-let operatorButtons = document.querySelectorAll('.number');
+let operatorButtons = document.querySelectorAll('.operator');
 
 const clear = document.querySelector('#clear');
 const add = document.querySelector('#add');
@@ -27,7 +27,29 @@ numberButtons.forEach((button) => {
         }
             displayOutput.textContent += button.textContent;
     });
+
+    operatorButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        let expression = displayOutput.textContent;
+        const identifier = Array.from(expression);
+
+        if (
+        identifier.includes('+') ||
+        identifier.includes('-') ||
+        identifier.includes('*') ||
+        identifier.includes('/')) {
+
+            
+            equals.dispatchEvent(clickEvent);
+
+        };
+        
+    });
 });
+
+});
+
+
 
 //Calculate after pressing equals:
 
@@ -51,22 +73,9 @@ divide.addEventListener('click', () => {
 
 });
 
+let clickEvent = new Event('click');
 
-operatorButtons.forEach((button) => {
-    let expression = displayOutput.textContent;
-    const identifier = Array.from(expression);
 
-    button.addEventListener('click', () => {
-        if (identifier.includes('*') || 
-        identifier.includes('+') ||
-        identifier.includes('-') ||
-        identifier.includes('/')) {
-
-            
-        }
-
-    });
-});
 
 
 
@@ -109,6 +118,7 @@ equals.addEventListener('click', () => {
 
     }  
 });
+
 
 
 
