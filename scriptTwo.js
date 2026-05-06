@@ -1,20 +1,43 @@
 let displayOutput = document.querySelector('#output');
+let displayInput = document.querySelector('#input');
 let numberButtons = document.querySelectorAll('.number');
+let operatorButtons = document.querySelectorAll('.operator');
 
 let firstNum = 0;
 let operator = 0;
 let secondNum = 0;
 
+const clear = document.querySelector('#clear');
+
+
+
+
+
+clear.addEventListener('click', () => {
+    displayOutput.textContent = '';
+    displayInput.textContent = 0;
+});
+
 
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        if (displayOutput.textContent === '0') {
-            displayOutput.textContent = ''; 
+        if (displayInput.textContent === '0') {
+            displayInput.textContent = ''; 
         }
-        displayOutput.textContent += button.textContent;
-        firstNum = displayOutput.textContent;
+        displayInput.textContent += button.textContent;
 
+
+    });
+
+    operatorButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            if (button.textContent === '+') {
+                displayOutput.textContent = displayInput.textContent;
+                firstNum = displayOutput.textContent;
+                displayOutput.textContent += '+';
+            }
+        });
     });
 
 });
