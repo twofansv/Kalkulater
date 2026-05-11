@@ -18,28 +18,76 @@ clear.addEventListener('click', () => {
     displayInput.textContent = 0;
 });
 
+function updateFirstNumberAndDisplay () {
+    displayOutput.textContent = displayInput.textContent;
+    firstNum = +displayOutput.textContent;
+};
 
 
-numberButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-        if (displayInput.textContent === '0') {
-            displayInput.textContent = ''; 
-        }
-        displayInput.textContent += button.textContent;
-
-
-    });
-
-    operatorButtons.forEach((button) => {
+function displayPressedNumber () {
+    numberButtons.forEach((button) => {
         button.addEventListener('click', () => {
-            if (button.textContent === '+') {
-                displayOutput.textContent = displayInput.textContent;
-                firstNum = displayOutput.textContent;
-                displayOutput.textContent += '+';
-            }
+            if (displayInput.textContent === '0') {
+                displayInput.textContent = ''; 
+        
+            } 
+
+            displayInput.textContent += button.textContent;
+
+            
         });
     });
+}
 
+displayPressedNumber();
+
+
+
+function reinputInputDisplay() {
+let flagToClear = false;
+
+    numberButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            if (flagToClear === false) {
+
+                displayInput.textContent = '';
+                flagToClear = true;
+                displayPressedNumber = false;
+
+                displayInput.textContent += button.textContent;
+            }
+    
+
+            
+        });
+    });
+};
+
+
+
+
+
+
+
+operatorButtons.forEach((button) => {
+
+    button.addEventListener('click', () => {
+        if (button.textContent === '+') {
+            updateFirstNumberAndDisplay();
+            displayOutput.textContent += '+';
+            
+         
+                reinputInputDisplay(); 
+   
+           
+        } else if (button.textContent === '-') {
+            updateFirstNumberAndDisplay();
+            displayOutput.textContent += '-';
+
+        };
+
+       
+    });
 });
 
 
