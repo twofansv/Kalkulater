@@ -19,8 +19,14 @@ clear.addEventListener('click', () => {
 });
 
 function updateFirstNumberAndDisplay () {
-    displayOutput.textContent = displayInput.textContent;
+    displayOutput.textContent += displayInput.textContent;
     firstNum = +displayOutput.textContent;
+};
+
+function updateSecondNumber () {
+    secondNum = firstNum;
+    secondNum = +displayInput.textContent;
+
 };
 
 
@@ -44,7 +50,7 @@ displayPressedNumber();
 
 
 function reinputInputDisplay() {
-let flagToClear = false;
+    let flagToClear = false;
 
     numberButtons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -56,9 +62,8 @@ let flagToClear = false;
 
                 displayInput.textContent += button.textContent;
             }
-    
+                updateSecondNumber();
 
-            
         });
     });
 };
@@ -74,6 +79,7 @@ operatorButtons.forEach((button) => {
     button.addEventListener('click', () => {
         if (button.textContent === '+') {
             updateFirstNumberAndDisplay();
+            updateSecondNumber();
             displayOutput.textContent += '+';
             
          
