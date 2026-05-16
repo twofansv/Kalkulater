@@ -1,11 +1,12 @@
-let displayOutput = document.querySelector('#output');
-let displayInput = document.querySelector('#input');
+let topInput = document.querySelector('#output');
+let bottomInput = document.querySelector('#input');
 let numberButtons = document.querySelectorAll('.number');
 let operatorButtons = document.querySelectorAll('.operator');
 
 let firstNum = 0;
 let operator = 0;
 let secondNum = 0;
+let sum = 0;
 
 const clear = document.querySelector('#clear');
 
@@ -14,18 +15,22 @@ const clear = document.querySelector('#clear');
 
 
 clear.addEventListener('click', () => {
-    displayOutput.textContent = '';
-    displayInput.textContent = 0;
+    topInput.textContent = '';
+    bottomInput.textContent = 0;
+    firstNum = 0;
+    secondNum = 0;
+    sum = 0;
+
 });
 
 function updateFirstNumberAndDisplay () {
-    displayOutput.textContent += displayInput.textContent;
-    firstNum = +displayOutput.textContent;
+    topInput.textContent += bottomInput.textContent;
+    firstNum = +topInput.textContent;
 };
 
 function updateSecondNumber () {
-    secondNum = firstNum;
-    secondNum = +displayInput.textContent;
+    // secondNum = firstNum;
+    secondNum = +bottomInput.textContent;
 
 };
 
@@ -33,12 +38,13 @@ function updateSecondNumber () {
 function displayPressedNumber () {
     numberButtons.forEach((button) => {
         button.addEventListener('click', () => {
-            if (displayInput.textContent === '0') {
-                displayInput.textContent = ''; 
+            if (bottomInput.textContent === '0') {
+                bottomInput.textContent = ''; 
         
             } 
 
-            displayInput.textContent += button.textContent;
+            bottomInput.textContent += button.textContent;
+            updateSecondNumber(); ///////////////////////////////////////RECENTLY ADDED. NILAGAY MO TO DITO IF MA-UUPDATE AGAD YUNG SECONDNUM. BUTI NAMAN GUMANA 5/15/2026
 
             
         });
@@ -46,6 +52,7 @@ function displayPressedNumber () {
 }
 
 displayPressedNumber();
+// updateFirstNumberAndDisplay();
 
 
 
@@ -56,13 +63,15 @@ function reinputInputDisplay() {
         button.addEventListener('click', () => {
             if (flagToClear === false) {
 
-                displayInput.textContent = '';
+                bottomInput.textContent = '';
                 flagToClear = true;
-                displayPressedNumber = false;
+                
 
-                displayInput.textContent += button.textContent;
+                bottomInput.textContent += button.textContent;
+
+                                    updateSecondNumber();
+
             }
-                updateSecondNumber();
 
         });
     });
@@ -70,36 +79,51 @@ function reinputInputDisplay() {
 
 
 
+function displayUpdateUponPressingOperator(){
+
+    if (flagToCompute === true) {
+        bottomInput.textContent = +sum;
+        topInput.textContent = +sum;
+    }
+    firstNum = +bottomInput.textContent;
+            //     updateFirstNumberAndDisplay();
+            // updateSecondNumber();
+
+}
 
 
 
 
-operatorButtons.forEach((button) => {
+function activeOperatorState () {
 
-    button.addEventListener('click', () => {
-        if (button.textContent === '+') {
-            updateFirstNumberAndDisplay();
-            updateSecondNumber();
-            displayOutput.textContent += '+';
-            
-         
-                reinputInputDisplay(); 
-   
-           
-        } else if (button.textContent === '-') {
-            updateFirstNumberAndDisplay();
-            displayOutput.textContent += '-';
+let flagToCompute = false; // NEW NEW DIN 5/15/2026
 
-        };
+    operatorButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            if (button.textContent === '+') {
+                updateFirstNumberAndDisplay();
+                topInput.textContent += '+';
+                reinputInputDisplay();
+              
 
-       
+            } else if (button.textContent === '-') {
+
+
+
+            }
+        });
     });
-});
+}
+
+
+activeOperatorState();
+
+
 
 
 function add(firstNum, secondNum) {
-    
-    return firstNum + secondNum;
+    sum = firstNum + secondNum
+    return sum;
 };
 
 function subtract(firstNum, secondNum) {
@@ -120,14 +144,49 @@ function operate(operator, firstNum, secondNum) {
     switch (operator) {
         case '+':
             add(firstNum, secondNum);
-        
+            break;
         case '-':
             subtract(firstNum, secondNum);
-        
+            break;
+
         case '*':
             multiply(firstNum, secondNum);
-        
+            break;
+
         case '/':
             divide(firstNum, secondNum);
+            break;
+
     };
 };
+
+
+
+//OPERATE LOGIC
+// operatorButtons.forEach((button) => {
+// THIS OPERATOR BUTTONS SHIT IS BUGGING THE FUCK OUT. NEED TO REFACTOR ASAP!
+// CHECK WHITEBOARD FOR MORE INFO
+// YA KNOW WHAT. REFACTOR ALL THE ASSIGNING LOGIC AND DISPLAY UPDATE SHIT. 
+
+
+//     button.addEventListener('click', () => {
+//         if (button.textContent === '+') {
+//             updateSecondNumber();
+//             displayOutput.textContent += '+';
+             
+         
+//             reinputInputDisplay(); 
+
+//             displayUpdateUponPressingOperator();
+//                                     add(firstNum, secondNum);
+
+//             flagToCompute = true;
+           
+//         } else if (button.textContent === '-') {
+//             updateFirstNumberAndDisplay();
+//             displayOutput.textContent += '-';
+
+//         };
+//     });
+// });
+
