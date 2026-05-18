@@ -44,7 +44,7 @@ function displayPressedNumber () {
             } 
 
             bottomInput.textContent += button.textContent;
-            updateSecondNumber(); ///////////////////////////////////////RECENTLY ADDED. NILAGAY MO TO DITO IF MA-UUPDATE AGAD YUNG SECONDNUM. BUTI NAMAN GUMANA 5/15/2026
+            updateSecondNumber(); 
 
             
         });
@@ -54,6 +54,7 @@ function displayPressedNumber () {
 displayPressedNumber();
 // updateFirstNumberAndDisplay();
 
+let currentPushedOperator;
 
 
 function reinputInputDisplay() {
@@ -65,11 +66,11 @@ function reinputInputDisplay() {
 
                 bottomInput.textContent = '';
                 flagToClear = true;
-                
+
 
                 bottomInput.textContent += button.textContent;
 
-                                    updateSecondNumber();
+                // updateSecondNumber();
 
             }
 
@@ -81,30 +82,27 @@ function reinputInputDisplay() {
 
 function displayUpdateUponPressingOperator(){
 
-    if (flagToCompute === true) {
-        bottomInput.textContent = +sum;
-        topInput.textContent = +sum;
-    }
-    firstNum = +bottomInput.textContent;
-            //     updateFirstNumberAndDisplay();
-            // updateSecondNumber();
+      
 
 }
 
 
 
-
 function activeOperatorState () {
-
-let flagToCompute = false; // NEW NEW DIN 5/15/2026
+flagToCompute = false;
 
     operatorButtons.forEach((button) => {
+
         button.addEventListener('click', () => {
             if (button.textContent === '+') {
+
+
+                currentPushedOperator = button.textContent;
                 updateFirstNumberAndDisplay();
-                topInput.textContent += '+';
                 reinputInputDisplay();
-              
+                topInput.textContent += '+';
+
+
 
             } else if (button.textContent === '-') {
 
@@ -122,21 +120,23 @@ activeOperatorState();
 
 
 function add(firstNum, secondNum) {
-    sum = firstNum + secondNum
+    sum = firstNum + secondNum;
     return sum;
 };
 
 function subtract(firstNum, secondNum) {
+    sum = firstNum - secondNum;
     return firstNum - secondNum;
 };
 
 function multiply(firstNum, secondNum) {
+    sum = firstNum * secondNum;
     return firstNum * secondNum;
 };
 
 function divide(firstNum, secondNum) {
-    const result = firstNum / secondNum;
-    return result.toFixed(3);
+    sum = firstNum / secondNum;
+    return sum.toFixed(3);
 };
 
 
@@ -144,21 +144,27 @@ function operate(operator, firstNum, secondNum) {
     switch (operator) {
         case '+':
             add(firstNum, secondNum);
+            return sum; 
             break;
         case '-':
             subtract(firstNum, secondNum);
+            return sum;
             break;
 
         case '*':
             multiply(firstNum, secondNum);
+            return sum;
             break;
 
         case '/':
             divide(firstNum, secondNum);
+            return sum;
             break;
 
     };
 };
+
+
 
 
 
