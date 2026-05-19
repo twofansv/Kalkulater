@@ -2,6 +2,7 @@ let topInput = document.querySelector('#output');
 let bottomInput = document.querySelector('#input');
 let numberButtons = document.querySelectorAll('.number');
 let operatorButtons = document.querySelectorAll('.operator');
+let equals = document.querySelector('#equals-button');
 
 let firstNum = 0;
 let operator = 0;
@@ -96,8 +97,8 @@ function isOperatorAlreadyPressed(){
 
 }
 
+ 
 
-// if icliclick ulit yung operator, asign firstNum sa topInput then change the appropriate clicked operator
 
 
 function activeOperatorState () {
@@ -112,12 +113,24 @@ flagToCompute = false;
                 updateFirstNumberAndDisplay();
                 reinputInputDisplay();
 
-                // topInput.textContent += '+';
 
                 topInput.textContent += currentPushedOperator;
                 isOperatorAlreadyPressed();
 
+
+
+
             } else if (button.textContent === '-') {
+
+
+                currentPushedOperator = button.textContent;
+                updateFirstNumberAndDisplay();
+                reinputInputDisplay();
+
+
+                topInput.textContent += currentPushedOperator;
+                isOperatorAlreadyPressed();
+
 
 
 
@@ -128,7 +141,16 @@ flagToCompute = false;
 
 
 activeOperatorState();
+activeEqualState();
 
+function activeEqualState () {
+    equals.addEventListener('click', () => {
+        operate(currentPushedOperator, firstNum, secondNum);
+        topInput.textContent += secondNum;
+        topInput.textContent += '=';
+        return bottomInput.textContent = sum;
+    })
+};
 
 
 
