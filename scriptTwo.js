@@ -70,7 +70,7 @@ function reinputInputDisplay() {
 
                 bottomInput.textContent += button.textContent;
 
-                // updateSecondNumber();
+                updateSecondNumber();
 
             }
 
@@ -80,12 +80,24 @@ function reinputInputDisplay() {
 
 
 
-function displayUpdateUponPressingOperator(){
+function isOperatorAlreadyPressed(){
+ 
+    operatorButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            topInput.textContent = bottomInput.textContent;
+ 
+            firstNum = +topInput.textContent;
+            topInput.textContent += currentPushedOperator;
 
-      
+            // updateFirstNumberAndDisplay(); 
+
+        });
+    });
 
 }
 
+
+// if icliclick ulit yung operator, asign firstNum sa topInput then change the appropriate clicked operator
 
 
 function activeOperatorState () {
@@ -96,13 +108,14 @@ flagToCompute = false;
         button.addEventListener('click', () => {
             if (button.textContent === '+') {
 
-
                 currentPushedOperator = button.textContent;
                 updateFirstNumberAndDisplay();
                 reinputInputDisplay();
-                topInput.textContent += '+';
 
+                // topInput.textContent += '+';
 
+                topInput.textContent += currentPushedOperator;
+                isOperatorAlreadyPressed();
 
             } else if (button.textContent === '-') {
 
