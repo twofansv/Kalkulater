@@ -3,6 +3,7 @@ let bottomInput = document.querySelector('#input');
 let numberButtons = document.querySelectorAll('.number');
 let operatorButtons = document.querySelectorAll('.operator');
 let equals = document.querySelector('#equals-button');
+let undo = document.querySelector('#undo');
 
 let firstNum = 0;
 let operator = 0;
@@ -97,44 +98,39 @@ function isOperatorAlreadyPressed(){
 
 }
 
- 
 
+undo.addEventListener('click', () => {
+    let undoResult = bottomInputLength(bottomInput.textContent);
+    bottomInput.textContent = undoResult;
+    updateSecondNumber();
+
+    if (bottomInput.textContent === '') {
+        bottomInput.textContent = '0';
+        updateSecondNumber();
+    };
+});
+
+
+function bottomInputLength (str) {
+    return str.slice(0, -1);
+};  
 
 
 function activeOperatorState () {
 flagToCompute = false;
-
     operatorButtons.forEach((button) => {
-
         button.addEventListener('click', () => {
-            if (button.textContent === '+') {
+            if (button.textContent === '+' ||
+                button.textContent === '-' ||
+                button.textContent === '*' ||
+                button.textContent === '/') {
 
-                currentPushedOperator = button.textContent;
-                updateFirstNumberAndDisplay();
-                reinputInputDisplay();
-
-
-                topInput.textContent += currentPushedOperator;
-                isOperatorAlreadyPressed();
-
-
-
-
-            } else if (button.textContent === '-') {
-
-
-                currentPushedOperator = button.textContent;
-                updateFirstNumberAndDisplay();
-                reinputInputDisplay();
-
-
-                topInput.textContent += currentPushedOperator;
-                isOperatorAlreadyPressed();
-
-
-
-
-            }
+                    currentPushedOperator = button.textContent;
+                    updateFirstNumberAndDisplay();
+                    reinputInputDisplay();
+                    topInput.textContent += currentPushedOperator;
+                    isOperatorAlreadyPressed();
+            };
         });
     });
 }
@@ -193,7 +189,7 @@ function operate(operator, firstNum, secondNum) {
 
         case '/':
             divide(firstNum, secondNum);
-            return sum;
+            return sum.toFixed(3);
             break;
 
     };
