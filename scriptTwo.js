@@ -151,14 +151,13 @@ equals.addEventListener('click', () => {
         firstNum = +sum;
 
     } else if (currentPushedOperator === '*') {
+        topInput.textContent = firstNum;
+        topInput.textContent += '*';
+        topInput.textContent += secondNum;
         operate(currentPushedOperator, firstNum, secondNum);
-        topInput.textContent = +secondNum;
-        topInput.textContent += currentPushedOperator;
-        topInput.textContent += +firstNum;
-        topInput.textContent += '=';
-        bottomInput.textContent = +sum;
+        firstNum = sum;
+        bottomInput.textContent = secondNum;
         updateSecondNumber();
-        //calculation bug
     } else if (currentPushedOperator === '+') {
         topInput.textContent = firstNum;
         topInput.textContent += '+';
@@ -168,7 +167,9 @@ equals.addEventListener('click', () => {
         bottomInput.textContent = secondNum;
         updateSecondNumber();
   };    
+
 bottomInput.textContent = sum;
+
 })
 
 
