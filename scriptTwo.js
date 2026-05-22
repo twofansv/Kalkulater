@@ -140,33 +140,19 @@ let tempFirstNum = 0;
 equals.addEventListener('click', () => {
 
  if (currentPushedOperator === '-' ||
-    currentPushedOperator === '/') {
+    currentPushedOperator === '/' ||
+    currentPushedOperator === '+' ||
+    currentPushedOperator === '*') {
 
-        operate(currentPushedOperator, firstNum, secondNum);
-        topInput.textContent = +firstNum;
+        topInput.textContent = firstNum;
         topInput.textContent += currentPushedOperator;
-        topInput.textContent += +secondNum;
-        topInput.textContent += '=';
-        bottomInput.textContent = +sum;
-        firstNum = +sum;
+        topInput.textContent += secondNum;
+        operate(currentPushedOperator, firstNum, secondNum);
+        firstNum = sum;
+        bottomInput.textContent = secondNum;
+        updateSecondNumber();
 
-    } else if (currentPushedOperator === '*') {
-        topInput.textContent = firstNum;
-        topInput.textContent += '*';
-        topInput.textContent += secondNum;
-        operate(currentPushedOperator, firstNum, secondNum);
-        firstNum = sum;
-        bottomInput.textContent = secondNum;
-        updateSecondNumber();
-    } else if (currentPushedOperator === '+') {
-        topInput.textContent = firstNum;
-        topInput.textContent += '+';
-        topInput.textContent += secondNum;
-        operate(currentPushedOperator, firstNum, secondNum);
-        firstNum = sum;
-        bottomInput.textContent = secondNum;
-        updateSecondNumber();
-  };    
+    };
 
 bottomInput.textContent = sum;
 
