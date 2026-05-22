@@ -167,16 +167,9 @@ equals.addEventListener('click', () => {
         firstNum = sum;
         bottomInput.textContent = secondNum;
         updateSecondNumber();
-
   };    
-
+bottomInput.textContent = sum;
 })
-
-function equalsIsPressedAgain () {
-    firstNum = sum;
-
-};
-
 
 
 
