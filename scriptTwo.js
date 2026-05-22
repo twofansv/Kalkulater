@@ -109,7 +109,6 @@ function bottomInputLength (str) {
 
 
 
-flagToCompute = false;
 operatorButtons.forEach((button) => {
     button.addEventListener('click', () => {
         if (button.textContent === '+' ||
