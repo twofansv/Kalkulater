@@ -6,9 +6,10 @@ let equals = document.querySelector('#equals-button');
 let undo = document.querySelector('#undo');
 
 let firstNum = 0;
-let operator = 0;
+let operator;
 let secondNum = 0;
 let sum = 0;
+
 
 const clear = document.querySelector('#clear');
 
@@ -68,14 +69,10 @@ function reinputInputDisplay() {
 
                 bottomInput.textContent = '';
                 flagToClear = true;
-
-
                 bottomInput.textContent += button.textContent;
-
                 updateSecondNumber();
 
             }
-
         });
     });
 };
@@ -87,20 +84,17 @@ function isOperatorAlreadyPressed(){
     operatorButtons.forEach((button) => {
         button.addEventListener('click', () => {
             topInput.textContent = bottomInput.textContent;
- 
             firstNum = +topInput.textContent;
             topInput.textContent += currentPushedOperator;
 
-            // updateFirstNumberAndDisplay(); 
-
         });
     });
-
 }
 
 
 undo.addEventListener('click', () => {
     let undoResult = bottomInputLength(bottomInput.textContent);
+
     bottomInput.textContent = undoResult;
     updateSecondNumber();
 
@@ -116,37 +110,82 @@ function bottomInputLength (str) {
 };  
 
 
-function activeOperatorState () {
+
 flagToCompute = false;
-    operatorButtons.forEach((button) => {
-        button.addEventListener('click', () => {
-            if (button.textContent === '+' ||
-                button.textContent === '-' ||
-                button.textContent === '*' ||
-                button.textContent === '/') {
+operatorButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (button.textContent === '+' ||
+            button.textContent === '-' ||
+            button.textContent === '*' ||
+            button.textContent === '/') {
 
-                    currentPushedOperator = button.textContent;
-                    updateFirstNumberAndDisplay();
-                    reinputInputDisplay();
-                    topInput.textContent += currentPushedOperator;
-                    isOperatorAlreadyPressed();
-            };
-        });
+                currentPushedOperator = button.textContent;
+                updateFirstNumberAndDisplay();
+                reinputInputDisplay();
+                topInput.textContent += currentPushedOperator;
+                isOperatorAlreadyPressed();
+        };
     });
-}
+});
+
+ let flagToTrigger = false;
+let tempFirstNum = 0;
 
 
-activeOperatorState();
-activeEqualState();
 
-function activeEqualState () {
-    equals.addEventListener('click', () => {
+//this code is so fucking convoluted. im open for suggestions brain...
+
+equals.addEventListener('click', () => {
+
+ if (currentPushedOperator === '-' ||
+    currentPushedOperator === '/') {
+
         operate(currentPushedOperator, firstNum, secondNum);
-        topInput.textContent += secondNum;
+
+        topInput.textContent = +firstNum;
+        topInput.textContent += currentPushedOperator;
+
+        topInput.textContent += +secondNum;
+
         topInput.textContent += '=';
-        return bottomInput.textContent = sum;
-    })
-};
+
+        bottomInput.textContent = +sum;
+        firstNum = +sum;
+
+    } else if (currentPushedOperator === '*') {
+        operate(currentPushedOperator, firstNum, secondNum);
+
+        topInput.textContent = +secondNum;
+        topInput.textContent += currentPushedOperator;
+
+        topInput.textContent += +firstNum;
+        topInput.textContent += '=';
+
+        bottomInput.textContent = +sum;
+
+        updateSecondNumber();
+
+    } else if (currentPushedOperator === '+') {
+        operate(currentPushedOperator, firstNum, secondNum);
+
+        topInput.textContent = +secondNum;
+        topInput.textContent += currentPushedOperator;
+
+        topInput.textContent += +firstNum;
+        topInput.textContent += '=';
+
+        bottomInput.textContent = +sum;
+
+        updateSecondNumber();   
+    };
+
+
+})
+
+
+
+
+
 
 
 
@@ -157,7 +196,7 @@ function add(firstNum, secondNum) {
 
 function subtract(firstNum, secondNum) {
     sum = firstNum - secondNum;
-    return firstNum - secondNum;
+    return sum;
 };
 
 function multiply(firstNum, secondNum) {
