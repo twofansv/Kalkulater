@@ -8,6 +8,7 @@ let undo = document.querySelector('#undo');
 let firstNum = 0;
 let operator;
 let secondNum = 0;
+let pastSecondNum = 0;
 let sum = 0;
 
 
@@ -27,12 +28,13 @@ clear.addEventListener('click', () => {
 });
 
 function updateFirstNumberAndDisplay () {
-    topInput.textContent += bottomInput.textContent;
+    topInput.textContent = bottomInput.textContent;
     firstNum = +topInput.textContent;
 };
 
 function updateSecondNumber () {
-    // secondNum = firstNum;
+    // topInput.textContent = bottomInput.textContent;
+    tempSecondNum = secondNum;
     secondNum = +bottomInput.textContent;
 
 };
@@ -141,48 +143,39 @@ equals.addEventListener('click', () => {
     currentPushedOperator === '/') {
 
         operate(currentPushedOperator, firstNum, secondNum);
-
         topInput.textContent = +firstNum;
         topInput.textContent += currentPushedOperator;
-
         topInput.textContent += +secondNum;
-
         topInput.textContent += '=';
-
         bottomInput.textContent = +sum;
         firstNum = +sum;
 
     } else if (currentPushedOperator === '*') {
         operate(currentPushedOperator, firstNum, secondNum);
-
         topInput.textContent = +secondNum;
         topInput.textContent += currentPushedOperator;
-
         topInput.textContent += +firstNum;
         topInput.textContent += '=';
-
         bottomInput.textContent = +sum;
-
+        updateSecondNumber();
+        //calculation bug
+    } else if (currentPushedOperator === '+') {
+        topInput.textContent = firstNum;
+        topInput.textContent += '+';
+        topInput.textContent += secondNum;
+        operate(currentPushedOperator, firstNum, secondNum);
+        firstNum = sum;
+        bottomInput.textContent = secondNum;
         updateSecondNumber();
 
-    } else if (currentPushedOperator === '+') {
-        operate(currentPushedOperator, firstNum, secondNum);
-
-        topInput.textContent = +secondNum;
-        topInput.textContent += currentPushedOperator;
-
-        topInput.textContent += +firstNum;
-        topInput.textContent += '=';
-
-        bottomInput.textContent = +sum;
-
-        updateSecondNumber();   
-    };
-
+  };    
 
 })
 
+function equalsIsPressedAgain () {
+    firstNum = sum;
 
+};
 
 
 
