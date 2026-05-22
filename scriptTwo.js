@@ -8,7 +8,6 @@ let undo = document.querySelector('#undo');
 let firstNum = 0;
 let operator;
 let secondNum = 0;
-let pastSecondNum = 0;
 let sum = 0;
 
 
@@ -33,8 +32,6 @@ function updateFirstNumberAndDisplay () {
 };
 
 function updateSecondNumber () {
-    // topInput.textContent = bottomInput.textContent;
-    tempSecondNum = secondNum;
     secondNum = +bottomInput.textContent;
 
 };
@@ -57,7 +54,6 @@ function displayPressedNumber () {
 }
 
 displayPressedNumber();
-// updateFirstNumberAndDisplay();
 
 let currentPushedOperator;
 
@@ -130,12 +126,7 @@ operatorButtons.forEach((button) => {
     });
 });
 
- let flagToTrigger = false;
-let tempFirstNum = 0;
 
-
-
-//this code is so fucking convoluted. im open for suggestions brain...
 
 equals.addEventListener('click', () => {
 
@@ -206,36 +197,3 @@ function operate(operator, firstNum, secondNum) {
 
     };
 };
-
-
-
-
-
-//OPERATE LOGIC
-// operatorButtons.forEach((button) => {
-// THIS OPERATOR BUTTONS SHIT IS BUGGING THE FUCK OUT. NEED TO REFACTOR ASAP!
-// CHECK WHITEBOARD FOR MORE INFO
-// YA KNOW WHAT. REFACTOR ALL THE ASSIGNING LOGIC AND DISPLAY UPDATE SHIT. 
-
-
-//     button.addEventListener('click', () => {
-//         if (button.textContent === '+') {
-//             updateSecondNumber();
-//             displayOutput.textContent += '+';
-             
-         
-//             reinputInputDisplay(); 
-
-//             displayUpdateUponPressingOperator();
-//                                     add(firstNum, secondNum);
-
-//             flagToCompute = true;
-           
-//         } else if (button.textContent === '-') {
-//             updateFirstNumberAndDisplay();
-//             displayOutput.textContent += '-';
-
-//         };
-//     });
-// });
-
