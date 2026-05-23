@@ -17,6 +17,8 @@ const clear = document.querySelector('#clear');
 
 
 
+
+
 clear.addEventListener('click', () => {
     topInput.textContent = '';
     bottomInput.textContent = 0;
@@ -48,14 +50,29 @@ function displayPressedNumber () {
             bottomInput.textContent += button.textContent;
             updateSecondNumber(); 
 
-            
         });
+    });
+
+    window.addEventListener('keydown', (event) => {
+        if (bottomInput.textContent === '0') {
+                    bottomInput.textContent = ''; 
+            };
+        if (event.key >= '0' && event.key <= '9' || event.key === '.') {
+            bottomInput.textContent += event.key;
+            updateSecondNumber(); 
+        };
+
     });
 }
 
 displayPressedNumber();
 
 let currentPushedOperator;
+
+
+ 
+
+
 
 
 function reinputInputDisplay() {
@@ -73,6 +90,20 @@ function reinputInputDisplay() {
             }
         });
     });
+
+
+    window.addEventListener('keydown', (event) => {
+        if (flagToClear === false) { 
+            if (event.key >= '0' && event.key <= '9') {
+
+                bottomInput.textContent = '';
+                flagToClear = true;
+                bottomInput.textContent += event.key;
+                updateSecondNumber(); 
+            };
+        }
+    });
+
 };
 
 
@@ -87,6 +118,7 @@ function isOperatorAlreadyPressed(){
 
         });
     });
+
 }
 
 
@@ -111,10 +143,12 @@ function bottomInputLength (str) {
 
 operatorButtons.forEach((button) => {
     button.addEventListener('click', () => {
-        if (button.textContent === '+' ||
-            button.textContent === '-' ||
-            button.textContent === '*' ||
-            button.textContent === '/') {
+        if (
+            button.value === '+' ||
+            button.value === '-' ||
+            button.value === '*' ||
+            button.value === '/' ) {
+
 
                 currentPushedOperator = button.textContent;
                 updateFirstNumberAndDisplay();
@@ -123,7 +157,27 @@ operatorButtons.forEach((button) => {
                 isOperatorAlreadyPressed();
         };
     });
+
+
+    window.addEventListener('keydown', (event) => {
+        let pressedKey = event.key;
+        let pastOperator;
+        if (
+            pressedKey === '+' ||
+            pressedKey === '-' ||
+            pressedKey === '*' ||
+            pressedKey === '/') {
+
+            currentPushedOperator = pressedKey;
+            pastOperator = button.textContent;
+            button.textContent = pressedKey;
+            button.click();
+            button.textContent = pastOperator;
+
+        };
+    });
 });
+
 
 
 
