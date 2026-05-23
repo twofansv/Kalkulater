@@ -120,7 +120,6 @@ function isOperatorAlreadyPressed(){
     });
 
 }
-
 // Only one decimal restriction
 decimal.addEventListener('click', () => {
     let bottomHadDecimal = bottomInput.textContent.toString().includes('.');
