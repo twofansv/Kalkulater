@@ -4,6 +4,7 @@ let numberButtons = document.querySelectorAll('.number');
 let operatorButtons = document.querySelectorAll('.operator');
 let equals = document.querySelector('#equals-button');
 let undo = document.querySelector('#undo');
+let decimal = document.querySelector('#decimal');
 
 let firstNum = 0;
 let operator;
@@ -39,6 +40,7 @@ function updateSecondNumber () {
 };
 
 
+
 function displayPressedNumber () {
     numberButtons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -49,9 +51,9 @@ function displayPressedNumber () {
 
             bottomInput.textContent += button.textContent;
             updateSecondNumber(); 
-
-        });
     });
+});
+
 
     window.addEventListener('keydown', (event) => {
         if (bottomInput.textContent === '0') {
@@ -60,8 +62,9 @@ function displayPressedNumber () {
         if (event.key >= '0' && event.key <= '9' || event.key === '.') {
             bottomInput.textContent += event.key;
             updateSecondNumber(); 
+            
         };
-
+    
     });
 }
 
@@ -70,7 +73,7 @@ displayPressedNumber();
 let currentPushedOperator;
 
 
- 
+
 
 
 
@@ -85,8 +88,8 @@ function reinputInputDisplay() {
                 bottomInput.textContent = '';
                 flagToClear = true;
                 bottomInput.textContent += button.textContent;
+                
                 updateSecondNumber();
-
             }
         });
     });
@@ -104,8 +107,10 @@ function reinputInputDisplay() {
         }
     });
 
-};
 
+ 
+
+};
 
 
 function isOperatorAlreadyPressed(){
@@ -120,6 +125,17 @@ function isOperatorAlreadyPressed(){
     });
 
 }
+
+// Only one decimal restriction
+decimal.addEventListener('click', () => {
+    let bottomHadDecimal = bottomInput.textContent.toString().includes('.');
+        if(bottomHadDecimal) {
+            secondNum = bottomInput.textContent;
+        } else if (!bottomHadDecimal) {
+                bottomInput.textContent += '.';
+        };
+});
+
 
 
 undo.addEventListener('click', () => {
@@ -178,8 +194,14 @@ operatorButtons.forEach((button) => {
     });
 });
 
-
-
+// Keyboard EQUALS and UNDO button triggers
+window.addEventListener('keydown', () => {
+    if (event.key === 'Enter') {
+        equals.click();
+    } else if (event.key === 'Backspace') {
+        undo.click();
+    };
+});
 
 equals.addEventListener('click', () => {
 
