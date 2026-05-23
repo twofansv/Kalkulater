@@ -11,7 +11,6 @@ let operator;
 let secondNum = 0;
 let sum = 0;
 
-
 const clear = document.querySelector('#clear');
 
 
@@ -106,10 +105,6 @@ function reinputInputDisplay() {
             };   
         }
     });
-
-
- 
-
 };
 
 
