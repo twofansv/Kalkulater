@@ -46,7 +46,6 @@ function displayPressedNumber () {
         button.addEventListener('click', () => {
             if (bottomInput.textContent === '0') {
                 bottomInput.textContent = ''; 
-        
             } 
 
             bottomInput.textContent += button.textContent;
@@ -59,10 +58,12 @@ function displayPressedNumber () {
         if (bottomInput.textContent === '0') {
                     bottomInput.textContent = ''; 
             };
-        if (event.key >= '0' && event.key <= '9' || event.key === '.') {
+        if (event.key >= '0' && event.key <= '9') {
             bottomInput.textContent += event.key;
             updateSecondNumber(); 
             
+        } else if (event.key === '.') {
+            decimal.click();
         };
     
     });
@@ -71,9 +72,6 @@ function displayPressedNumber () {
 displayPressedNumber();
 
 let currentPushedOperator;
-
-
-
 
 
 
@@ -103,7 +101,9 @@ function reinputInputDisplay() {
                 flagToClear = true;
                 bottomInput.textContent += event.key;
                 updateSecondNumber(); 
-            };
+            }   else if (event.key === '.') {
+            decimal.click();
+            };   
         }
     });
 
@@ -130,7 +130,7 @@ function isOperatorAlreadyPressed(){
 decimal.addEventListener('click', () => {
     let bottomHadDecimal = bottomInput.textContent.toString().includes('.');
         if(bottomHadDecimal) {
-            secondNum = bottomInput.textContent;
+            secondNum = bottomInput.textContent; 
         } else if (!bottomHadDecimal) {
                 bottomInput.textContent += '.';
         };
@@ -252,21 +252,21 @@ function operate(operator, firstNum, secondNum) {
     switch (operator) {
         case '+':
             add(firstNum, secondNum);
-            return sum; 
+            return +sum; 
             break;
         case '-':
             subtract(firstNum, secondNum);
-            return sum;
+            return +sum;
             break;
 
         case '*':
             multiply(firstNum, secondNum);
-            return sum;
+            return +sum;
             break;
 
         case '/':
             divide(firstNum, secondNum);
-            return sum.toFixed(3);
+            return +sum.toFixed(3);
             break;
 
     };
