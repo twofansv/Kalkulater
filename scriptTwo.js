@@ -139,8 +139,7 @@ equals.addEventListener('click', () => {
         topInput.textContent += secondNum;
         operate(currentPushedOperator, firstNum, secondNum);
         firstNum = sum;
-        bottomInput.textContent = secondNum;
-        updateSecondNumber();
+        topInput.textContent += '=';
 
     };
 
